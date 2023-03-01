@@ -1,0 +1,71 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: alili_tv
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://43.136.84.193:3306/alili_database?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&tinyInt1isBit=false
+    username: root
+    password: 123456
+  data:
+    redis:
+      host: 43.136.84.193
+      port: 6379
+      password: 159357qazPLM
+      database: 0 # 使用0号数据库
+      jedis:
+        pool:
+          max-active: 8 # 最大连接数
+          max-wait: 50ms # 连接池最大阻塞等待时间
+          max-idle: 4 # 连接池中的最大空闲连接
+          min-idle: 0 # 连接池中的最小空闲连接
+      timeout: 1000ms
+  mail:
+    setting:
+      subject: 啊哩哩验证码 # 标题
+      text: 您正在使用邮箱登录ALILI，验证码为{}，切勿将验证码泄露于他人，有效期5分钟。 # 邮件内容
+      from: alili office # 对方看到的发送人
+    host: smtp.qq.com
+    username: 3588377558@qq.com
+    password: foboswseufxidagc
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+            required: true
+          timeout: 10000 # 邮件接收时间的限制，单位毫秒
+          connectiontimeout: 10000 # 连接时间的限制，单位毫秒
+          writetimeout: 10000 # 邮件发送时间的限制，单位毫秒
+
+mybatis:
+  db-config:
+    auto-generate:
+      id-name: id
+      id-type: SNOW # 全局id策略，优先属性上@Table的策略
+  configuration:
+    map-underscore-to-camel-case: true # 开启驼峰映射
+  mapper-locations: classpath:mapper/*.xml
+
+jwt:
+  header: Authorization #token返回头部
+  tokenPrefix: Bearer #token前缀
+  secret: 159357qazPLM #密钥
+  expireTime: 4320 #token有效时间 (分钟) 3天
+
+# 开启sql查看
+logging:
+  level:
+    com:
+      alili:
+        mapper: debug
+
+SMS:
+  signName: 瑞吉外卖
+  templateCode: SMS_267050663
+  secret: UnlRIREVvEf4PvsDTM2Hdwcocmmg5i
+  accessKeyId: LTAI5tPZ11twnCypMVWcVHvi
